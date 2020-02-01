@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Function library example</title>
+ 
+</head>
+<body>
+
+  <script>
+
+let move = ["rock","scissors","paper"];
+
+function computerPlay () {
+    var computerGame = Math.floor(Math.random() * move.length); 
+    return move[computerGame];
+}
+let Player = 0;
+let Computer = 0;
+
+function playRound (playerSelection,computerSelection){
+  const normalizedPlayerSelection = playerSelection.toLowerCase();
+  
+  if (normalizedPlayerSelection === computerSelection){
+    alert("Even, play another round");
+  } 
+  else if (normalizedPlayerSelection === "rock"){
+      if(computerSelection === "scissors"){
+        alert(name + " wins, Rock beats Scissors");
+        ++Player; 
+    } else {
+        alert("Computer wins, Paper beats Rock");
+        ++Computer; 
+    }
+} else if (normalizedPlayerSelection === "scissors"){
+      if (computerSelection === "paper"){
+      alert(name + " wins, Scissors beats Paper");
+      ++Player; 
+    }   else {
+      alert("Computer wins, Rock beats Scissors");
+      ++Computer; 
+    }
+  } else if (normalizedPlayerSelection === "paper"){
+      if (computerSelection === "rock"){
+      alert(name + " wins, Paper beats Rock");
+      ++Player; 
+    } else {
+      alert("Computer wins, Scissors beats Paper");
+      ++Computer; 
+    }
+  } else {
+    alert("invalid move, play another round");
+  }
+
+}
+function game (){
+
+  name = prompt("Hi , what's your name?","Player")
+
+  for (i = 1; i<=5; i++){
+    if (i < 5){
+      playerSelection =prompt("Round " + i + " what's your next move?");
+      computerSelection = computerPlay();
+      playRound(playerSelection,computerSelection);
+      console.log(name +" played " + playerSelection + ", " +"Computer played " + computerSelection);
+    } else {
+      playerSelection =prompt("Last round, focus " + name);
+      computerSelection = computerPlay();
+      playRound(playerSelection,computerSelection);
+      console.log(name +" played " + playerSelection + ", " + "Computer played " + computerSelection);
+
+    }
+  }
+  
+
+  if (Player > Computer){
+    alert(name + " is the winner of the game");
+    console.log(name + " " + Player + "- Computer " + Computer + ", " + name + " is the winner of the game");
+  } else if (Player < Computer){
+    alert("The mighty Computer wins the game");
+    console.log (name + " " + Player + "- Computer " + Computer + ", the mighty Computer wins the game");
+  } else {
+    alert("We don't have a winner this time");
+    console.log(name + " " + Player + "- Computer " + Computer + ", we don't have a winner this time")
+  }
+}
+
+  </script>
+</body> 
+</html>
