@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Function library example</title>
+ 
+</head>
+<body>
+  <h1>First to Five wins</h1>
+  <br>
+  <h2>Player</h2>
+  <div id="container">
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+</div>
+<br>
+<h2>Score</h2>
+<p><ul>
+  <li >
+    <p id="playerName">Player</p>
+    <p id="displayPlayerScore">0</p>
+  </li>
+  <li>
+    <p>Computer</p>
+    <p id="displayComputerScore">0</p>
+  </li>
+</ul></p>
+<br>
+<h2>Computer Move</h2>
+<p id="displayComputerMove">-</p>
+<br>
+<br>
+<h2 id="displayWinner"> </h2>
+
+
+  <script>
+
+//Array with different moves
+let move = ["rock","scissors","paper"];
+
+
+// Random selection of the computer
+function computerPlay () {
+    var computerGame = Math.floor(Math.random() * move.length); 
+    return move[computerGame];
+}
+//score
+let Player = 0;
+let Computer = 0;
+
+//  display
+const displayPlayerScore = document.querySelector('#displayPlayerScore');
+const displayComputerScore = document.querySelector('#displayComputerScore');
+const displayComputerMove = document.querySelector('#displayComputerMove');
+const displayWinner = document.querySelector('#displayWinner');
+
+function resetScore(){
+  Computer = 0;
+  Player = 0;
+}
+
+function displayScore() {
+  displayComputerScore.textContent = Computer;
+  displayPlayerScore.textContent = Player;
+}
+// for each button start a round
+const buttons = document.querySelectorAll('button')
+buttons.forEach((button) => {
+button.addEventListener('click', game) 
+
+});
+
+// round
+function playRound(playerSelection, computerSelection){
+  
+  computerSelection = computerPlay();
+  console.log (computerSelection, playerSelection);
+
+  if (playerSelection === computerSelection){
+  } 
+  else if (playerSelection === "rock"){
+      if(computerSelection === "scissors"){
+        ++Player; 
+    } else {
+        ++Computer; 
+    }
+} else if (playerSelection === "scissors"){
+      if (computerSelection === "paper"){
+      ++Player; 
+    }   else {
+      ++Computer; 
+    }
+  } else if (playerSelection === "paper"){
+      if (computerSelection === "rock"){
+      ++Player; 
+    } else {
+      ++Computer; 
+    }
+  } else {
+    alert("invalid move, play another round");
+  }
+  displayComputerMove.textContent = computerSelection;
+}
+
+
+function game(e) {
+  let playerSelection = e.target.id;
+  let computerSelection = computerPlay();
+  playRound(playerSelection, computerSelection);
+  displayScore();
+  if (Player == 5){
+    displayWinner.textContent = "YOU WON";
+ 
+    resetScore();
+  } else if (Computer == 5) {
+    displayWinner.textContent = "YOU LOST";
+  
+    resetScore();
+  } else {displayWinner.textContent = "";}
+}
+
+
+  </script>
+</body> 
+</html>
